@@ -1,1 +1,8 @@
 ai_context/
+
+### Environments (Security) ###
+.env
+.env.*
+!.env.example       # <--- [주환님 방어 로직] 오직 이 껍데기 파일만 깃허브 업로드 프리패스 허용!
+*-secret.yml
+*-secret.properties
