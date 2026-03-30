@@ -1,4 +1,4 @@
- Phase 2: 데이터베이스 연동 및 Entity 설계 ToDo 리스트
+# Phase 3: 도커 데이터베이스 인프라 기동 및 JPA Entity 설계 ToDo 리스트
 
 이 문서는 개발자가 DBeaver 세팅을 마친 후, 에이전트와 협업하여 Spring Data JPA 기반의 'Code-First(엔티티 ➡️ 테이블 자동 생성)' 핵심 실무를 달성하기 위한 구체적인 작업 로드맵이다.
 
