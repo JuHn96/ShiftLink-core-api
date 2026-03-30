@@ -53,7 +53,7 @@
 | `phone_number` | VARCHAR(20) | UNIQUE, NULLABLE | 📱 무분별한 봇(Bot) 가입 방지용 명의 인증 (소셜로 연동 직후 추가 기입받음) |
 | `email` | VARCHAR(100) | NULLABLE | ✉️ 폰번호 바뀐 유저의 비번찾기 및 마케팅용 (카카오 등 소셜에서 이메일 미제공 구멍 방지용 NULL 허용) |
 
-*(강력 최적화: `auth_provider`와 `provider_id` 두 개를 묶은 복합 유니크 인덱스를 추가하여, 동일한 카카오 계정으로 두 번 가입 시 백엔드 단에서 충돌하기 전에 DB 단에서 무결성 에러를 즉시 차단합니다)*
+*(강력 최적화: `auth_provider`와 `provider_id` 두 개를 묶은 복합 유니크 인덱스를 추가하여, 동일한 카카오 계정으로 두 번 가입 시 백엔드 단에서 충돌하기 전에 DB 단에서 무결성 에러를 즉시 차단합니다)*  
 | `name` | VARCHAR(50) | NOT NULL | 실명 |
 | `birth_date` | DATE | NULLABLE | 🎂 생년월일 (본인 인증 및 만 15세 알바생 등 연령 확인용) |
 | `nickname` | VARCHAR(50) | NOT NULL | 앱 내 표시 닉네임 |
