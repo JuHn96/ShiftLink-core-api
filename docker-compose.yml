@@ -1,0 +1,48 @@
+version: '3.8'
+
+# ==========================================
+# ShiftLink 로컬 DB (PostgreSQL) 구동을 위한 Docker Compose 설정
+# 
+# [사용법]
+# 터미널에서 이 파일이 있는 경로로 이동한 뒤 아래 명령어 실행:
+# 켜기: docker-compose up -d
+# 끄기: docker-compose down
+# 로그보기: docker-compose logs -f db
+# ==========================================
+
+services:
+  db:
+    # 1. 사용할 데이터베이스 엔진 이미지 (알파인 리눅스 기반으로 가볍고 빠른 15 버전 사용)
+    image: postgres:15-alpine
+    
+    # 2. 도커 컨테이너 이름 지정 (명령어 입력 시 찾기 쉽게 고정)
+    container_name: shiftlink_postgres
+    
+    # 3. 환경 변수 설정 (DB 접속 정보 및 시간대 설정)
+    environment:
+      POSTGRES_USER: shiftlink          # 접속 아이디
+      POSTGRES_PASSWORD: password       # 접속 비밀번호 (로컬 개발용)
+      POSTGRES_DB: shiftlink            # 생성될 기본 데이터베이스 이름
+      TZ: Asia/Seoul                    # 타임존 설정: DB 내부 시간을 강제로 한국 시간으로 맞춰 타임존 버그 예방
+      
+    # 4. 포트포워딩 설정 (내PC:도커컨테이너)
+    # 로컬 컴퓨터의 5432 포트로 들어오는 요청을 도커의 5432로 연결해 줍니다.
+    # DBeaver 등 DB 툴 접속 시 localhost 5432 포트로 연결하면 됩니다.
+    ports:
+      - "5432:5432"
+      
+    # 5. 폴더 및 파일 공유(마운트) 설정
+    volumes:
+      # (1) 도커 컨테이너가 꺼져도 데이터가 날아가지 않도록, 내부 실제 DB 데이터를 하단의 volumes 에 백업 보관
+      - postgres_data:/var/lib/postgresql/data
+      
+      # (2) [핵심] 방금 작성한 sql 파일을 통째로 컨테이너 내부의 초기화 폴더로 매핑
+      # DB가 "최초"로 띄워질 때 이 폴더 안에 있는 sql 파일을 자동으로 먼저 한번 실행시켜 테이블을 일괄 세팅합니다!
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      
+    # 6. 재시작 정책: 컴퓨터 껐다 켜거나 오류가 나도 사용자가 끄기 전까지 계속 알아서 다시 켜지게 합니다.
+    restart: unless-stopped
+
+# 컨테이너와 별개로 영구 보존될 가상 하드디스크 공간을 설정합니다 (위 volumes에서 사용됨)
+volumes:
+  postgres_data:

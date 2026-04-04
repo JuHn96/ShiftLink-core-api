@@ -5,9 +5,9 @@
 ---
 
 ## 🏗️ [Step 1] 인프라 세팅 (빈 DB 컨테이너 기동)
-- [ ] `docker-compose.yml` 뼈대 파일 생성 (PostgreSQL + 외부 포트 5432 매핑)
-- [ ] 터미널에서 `docker-compose up -d` 명령어 실행하여 백그라운드에 텅 빈 DB 구동
-- [ ] DBeaver 프로그램에서 해당 로컬 DB(localhost:5432)에 새롭게 접속하여 연결 여부 테스트 
+- [x] `docker-compose.yml` 뼈대 파일 생성 (PostgreSQL 15 + 외부 포트 5432 및 `init-db.sql` 마운트 매핑 완료)
+- [ ] 터미널에서 `docker-compose up -d` 명령어 실행하여 백그라운드에 DB 구동 및 자동 초기화
+- [ ] DBeaver 프로그램에서 해당 로컬 DB(localhost:5432)에 새롭게 접속하여 연결(테이블 세팅) 여부 확인 
 
 ## 🔓 [Step 2] 보안 자물쇠 해제 (개발 모드 전환)
 - [ ] `application.yml` 파일의 `ddl-auto: validate` 설정을 `update`로 임시 변경 (테이블 자동 생성을 허가)

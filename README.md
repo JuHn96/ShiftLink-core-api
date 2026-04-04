@@ -29,6 +29,7 @@
 - [x] 기획서 Gap 분석을 통한 핵심 코어 테이블(정산/알림/기록 등) 뼈대 설계 완료
 - [x] DB vs 백엔드 역할 분담 및 과잉 최적화(다이어트) ADR 확립
 - [x] 자체 메인 접속 ID 체계와 소셜 로그인(OAuth2) 확장 융합 유저 원장 확립
+- [x] PostgreSQL 무결성 스크립트(`init-db.sql`) 및 Docker Compose 로컬 인프라 세팅 완료
 
 ### Phase 3: PostgreSQL 인프라 기동 및 JPA 엔티티 구축
 - [ ] 로컬 인프라(Docker Compose) PostgreSQL 빈 깡통 서버 띄우기 (DBeaver 연동)
