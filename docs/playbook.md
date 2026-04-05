@@ -69,6 +69,17 @@
   * **[인프라 청사진]:** 수초 내에 DB를 띄우고 초기화 스크립트를 마운트할 수 있도록 타임존이 고정된 `docker-compose.yml` 구축.
   * **[규칙 추가]:** `ai_context/guideline.md` 내에 "Core 백엔드 REST API 완전 분리" 및 "무상태(Stateless) EKS 인프라 대비" 0순위 절대 규칙 삽입 완료.
 
+### 📌 [Phase 3] PostgreSQL 인프라 기동 및 JPA 엔티티 무결점 매핑
+* **[2026-04-06] Kotlin `@Entity` 16개 전면 구축 및 DB 동기화 성공**
+  * `db_spec_postgres.md`의 DB 트리와 Kotlin 백엔드 엔티티의 1:1 무결성 매핑 구조 완비 (오차율 0%).
+  * 도메인 주도 설계(DDD) 아키텍처에 따라 `domain/` 내 12개 디렉토리에 엔티티 철저 분산 배치 및 Enum-to-String 파싱용 `@AttributeConverter` 선제적 도입 완료.
+  * 서버 기동 시 테이블을 함부로 Drop하지 않도록 `ddl-auto: validate` 룰을 사용하여 안정성을 극대화함.
+
+* **[2026-04-06] (Troubleshooting) Java IPv6 `localhost` 바인딩 거부 장애 해결 및 부팅 달성**
+  * Spring Boot(`bootRun`) 구동 시 도커 DB로의 `jdbc:postgresql://localhost` 연결이 거부되는 에러 발생.
+  * 리눅스의 `localhost`가 강제로 IPv6(`::1`)를 참조하는 함정을 발견하고, 즉시 `.env`를 `DB_HOST=127.0.0.1`로 핀포인트 교정.
+  * 앱 이름을 `core-api`에서 식별이 편한 `shiftlink`로 변경하고 8080 포트 Tomcat 기동 10,000% 정상화 성공.
+
 ## 🔄 2. 설정 및 명세 변경 이력 (Modification Logs)
 > 기존의 기술 명세나 아키텍처, 규칙 등이 수정되었을 때 그 사유를 기록
 

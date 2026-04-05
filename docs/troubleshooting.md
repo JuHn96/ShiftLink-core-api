@@ -47,3 +47,13 @@
   * AI가 과거 대화에서 언급된 특정 문자열(`@ai_context`)의 캐시 기억에만 과의존하여, 실행 전 `list_dir` 등으로 실제 디렉토리 구조 스캔 절차를 누락함.
 * **[Resolution] 해결 과정 및 결과:**
   * 개발자(Human)가 AI의 맹점을 즉각 매처럼 잡아내어 중복 폴더를 터미널 커맨드(`rm -r`)로 날리도록 통제하고, 올바른 원본 파일(`ai_context/guideline.md`) 위치로 궤도를 수정시켜 해당 규약을 병합(Merge)시키는 완벽한 위기관리 능력을 발휘함.
+
+---
+
+### 🐛 [2026-04-06] Java Spring Boot의 IPv6 localhost 바인딩 거부 (DB 연결 실패) 
+* **[Issue] 현상 및 에러 로그:**
+  * Docker Compose로 띄운 DB를 향해 Kotlin 코드를 구동(`bootRun`) 시 `Unable to determine Dialect without JDBC metadata` 에러와 함께 DB 연결이 거부됨.
+* **[Cause] 원인 분석:**
+  * 로컬 리눅스의 `localhost` 호스트명이 Java/Spring에서는 IPv6 루프백 주소(`::1`)로 우선 평가되어, 도커가 열어둔 IPv4(`127.0.0.1:5432`)를 찾아가지 못하고 통신 포트 미스매치가 발생함.
+* **[Resolution] 해결 과정 및 결과:**
+  * `.env` 환경 변수 파일 내 `DB_HOST=localhost`를 `DB_HOST=127.0.0.1`로 명시적으로 교체하여 강제 IPv4 바인딩을 지시함으로써 무결점 Entity 자동 매핑을 즉각 관철함.

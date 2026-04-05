@@ -32,13 +32,17 @@
 - [x] PostgreSQL 무결성 스크립트(`init-db.sql`) 및 Docker Compose 로컬 인프라 세팅 완료
 
 ### Phase 3: PostgreSQL 인프라 기동 및 JPA 엔티티 구축
-- [ ] 로컬 인프라(Docker Compose) PostgreSQL 빈 깡통 서버 띄우기 (DBeaver 연동)
-- [ ] DB 명세 기반 Code-First 엔티티(Entity) 클래스 자동 생성 및 Hibernate 동기화 검증
+- [x] 로컬 인프라(Docker Compose) PostgreSQL 빈 깡통 서버 띄우기 (DBeaver 연동)
+- [x] DB 명세 기반 엔티티(Entity) 클래스 생성 및 `ddl-auto: validate` 무결성 검증 100% 통과
+- [x] Ubuntu 로컬 환경 Java 17 세팅 및 백엔드(Tomcat 8080) 최적화 부팅 완료
+
+### Phase 4: Backend API & Service Logic (비즈니스 로직 연동)
 - [ ] 사업장 및 정밀 근무 기록 도메인 비즈니스 로직(오차 0% 계산) 개발 돌입
+- [ ] 전역 예외 처리(RestControllerAdvice) 및 Swagger API 명세 연동
+- [ ] 소셜 로그인 통합 인증망(OAuth2) 및 JWT/Security 도입
+- [ ] 핵심 컨트롤러 단위 테스트(TDD) 및 AWS EC2 배포용 도커 멀티스테이징 최적화
 
-### Phase 4: AI 마이크로서비스 및 수익화 보상/게이미피케이션 연동
-
-### Phase 3: 비즈니스 모델(BM) 도입 (수익화)
+### Phase 5: 비즈니스 모델(BM) 도입 (수익화)
 - [ ] AI 기능별 일일 무료 제공량 추적 로직 도입
 - [ ] 유료/무료 통합 AI 포인트 결제 장부 시스템 연동
 - [ ] 광고 보상(Reward) 및 광고 제거 구독 패키지 적용

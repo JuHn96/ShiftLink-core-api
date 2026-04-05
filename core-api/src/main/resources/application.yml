@@ -1,15 +1,17 @@
 # [Spring Boot 애플리케이션 공통 설정]
 spring:
+  config:
+    import: optional:file:../.env[.properties]
   application:
-    name: core-api # 향후 MSA 환경이나 모니터링 툴 표기에서 현재 앱을 식별하기 위한 고유 명칭
+    name: shiftlink # 향후 MSA 환경이나 모니터링 툴 표기에서 현재 앱을 식별하기 위한 고유 명칭
   
   # [PostgreSQL 데이터베이스 접속 환경 설정]
   datasource:
-    # 접속 URL (.env가 누락되면 localhost의 5432 포트 기본값으로 동작하도록 세팅)
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shiftlink}
-    # 접속 계정명 (기본값: postgres)
-    username: ${DB_USERNAME:postgres}
-    # [Security] 실제 비밀번호 (.env 암호 누락 시 보안 사고(해킹) 방지를 위해 기본값을 없애고 즉시 기동 실패 처리)
+    # 접속 URL
+    url: jdbc:postgresql://${DB_HOST:127.0.0.1}:${DB_PORT:5432}/${DB_NAME:shiftlink}
+    # 접속 계정명
+    username: ${DB_USERNAME:shiftlink}
+    # [Security] 실제 비밀번호
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
